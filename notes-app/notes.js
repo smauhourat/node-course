@@ -9,6 +9,8 @@ const addNote = function (title, body) {
     if (notDuplicate(title, notes)) {
         notes.push({ title: title, body: body })
         saveNotes(notes)
+    } else {
+        console.log('Note title taken')
     }
     console.log(notes)
 }
