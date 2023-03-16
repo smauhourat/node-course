@@ -13,9 +13,11 @@
 // console.log(name)
 
 // chalenge
-const getNotes = require('./notes.js')
+//const getNotes = require('./notes.js')
+const notes = require('./notes.js')
 const validator = require('validator')
 const yargs = require('yargs')
+
 
 // const chalk = require('chalk')
 // console.log(getNotes())
@@ -37,12 +39,11 @@ yargs.command({
         body: {
             describe: 'Note body',
             demandOption: true,
-            type: 'string'        }
+            type: 'string'
+        }
     },
     handler: function (argv) {
-        console.log('Adding new note!', argv)
-        console.log('Title: ', argv.title)
-        console.log('Body: ', argv.body)
+        notes.addNote(argv.title, argv.body)
     }
 })
 
