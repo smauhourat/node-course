@@ -15,6 +15,13 @@ const addNote = function (title, body) {
     console.log(notes)
 }
 
+const removeNote = function(title) {
+    const notes = loadNotes()
+    const result = notes.filter((e) => e.title !== title.toString())
+    console.log(result)
+    saveNotes(result)
+}
+
 const notDuplicate = function (title, notes) {
     const duplicatedNotes = notes.filter((e) => e.title === title)
     return duplicatedNotes.length == 0
@@ -36,5 +43,6 @@ const saveNotes = function (notes) {
 
 module.exports = {
     getNotes: getNotes,
-    addNote: addNote
+    addNote: addNote,
+    removeNote: removeNote
 }
