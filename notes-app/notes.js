@@ -5,7 +5,7 @@ const getNotes = function () {
     return "Your notes..."
 }
 
-const addNote = function (title, body) {
+const addNote = (title, body) => {
     const notes = loadNotes()
     if (notDuplicate(title, notes)) {
         notes.push({ title: title, body: body })
@@ -16,7 +16,7 @@ const addNote = function (title, body) {
     }
 }
 
-const removeNote = function(title) {
+const removeNote = (title) => {
     const notes = loadNotes()
     const result = notes.filter((e) => e.title !== title.toString())
     
@@ -28,12 +28,12 @@ const removeNote = function(title) {
     
 }
 
-const notDuplicate = function (title, notes) {
+const notDuplicate = (title, notes) => {
     const duplicatedNotes = notes.filter((e) => e.title === title)
     return duplicatedNotes.length == 0
 }
 
-const loadNotes = function () {
+const loadNotes = () => {
     try {
         const dataFile = fs.readFileSync('notes.json')
 
@@ -43,7 +43,7 @@ const loadNotes = function () {
     }
 }
 
-const saveNotes = function (notes) {
+const saveNotes = (notes) => {
     fs.writeFileSync('notes.json', JSON.stringify(notes))
 }
 
