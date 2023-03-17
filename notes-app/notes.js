@@ -5,6 +5,16 @@ const getNotes = function () {
     return "Your notes..."
 }
 
+const readNote = (title) => {
+    const notes = loadNotes();
+    const note = notes.find((e) => e.title == title)
+    if (note) {
+        console.log(chalk.green.inverse.bold(note.title), note.body)
+    }else {
+        console.log(chalk.red.bold.inverse('Note not exists!'))
+    }
+}
+
 const addNote = (title, body) => {
     const notes = loadNotes()
     if (notDuplicate(title, notes)) {
@@ -29,8 +39,12 @@ const removeNote = (title) => {
 }
 
 const notDuplicate = (title, notes) => {
-    const duplicatedNotes = notes.filter((e) => e.title === title)
-    return duplicatedNotes.length == 0
+    const duplicatedNote = notes.find((e) => e.title === title)
+    console.log(duplicatedNote)
+    return (duplicatedNote === undefined)
+
+    //const duplicatedNotes = notes.filter((e) => e.title === title)
+    //return duplicatedNotes.length == 0
 }
 
 const loadNotes = () => {
@@ -50,5 +64,6 @@ const saveNotes = (notes) => {
 module.exports = {
     getNotes: getNotes,
     addNote: addNote,
-    removeNote: removeNote
+    removeNote: removeNote,
+    readNote: readNote
 }
