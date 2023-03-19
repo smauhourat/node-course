@@ -6,6 +6,7 @@ const getNotes = function () {
 }
 
 const readNote = (title) => {
+    debugger
     const notes = loadNotes();
     const note = notes.find((e) => e.title == title)
     if (note) {
