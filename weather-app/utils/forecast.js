@@ -14,14 +14,13 @@ const request = require('postman-request')
 const forecast = (lat, lon, callback) => {
     const url = "http://api.weatherstack.com/forecast?access_key=6962c0c3606eb129fae12c0b74417542&query=" + lat + "," + lon
 
-    request({ url: url, json: true }, (error, response, body) => {
-        console.log(url)
+    request({ url: url, json: true }, (error, response, { error: errorAPI, current }) => {
         if (error) {
             callback('Network Error', undefined)
-        } else if (body.error) {
+        } else if (errorAPI) {
             callback('Service currently not available', undefined)
         } else {
-            const weatherStatus = "Today is " + body.current.weather_descriptions[0] + ". " + "It is currently " + body.current.temperature + " degres out. It is " + body.current.precip + "% chance of rain."
+            const weatherStatus = "Today is " + current.weather_descriptions[0] + ". " + "It is currently " + current.temperature + " degres out. It is " + current.precip + "% chance of rain."
             callback(undefined, weatherStatus)
         }
     })
