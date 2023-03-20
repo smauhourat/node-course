@@ -12,15 +12,17 @@ const request = require('postman-request')
 
 
 const forecast = (lat, lon, callback) => {
-    const url = "http://api.weatherstack.com/current?access_key=6962c0c3606eb129fae12c0b74417542&query=" + lat + "," + lon
+    const url = "http://api.weatherstack.com/forecast?access_key=6962c0c3606eb129fae12c0b74417542&query=" + lat + "," + lon
 
     request({ url: url, json: true }, (error, response, body) => {
-        if (error) { 
+        console.log(url)
+        if (error) {
             callback('Network Error', undefined)
         } else if (body.error) {
             callback('Service currently not available', undefined)
         } else {
-            callback(undefined, body.current)
+            const weatherStatus = "Today is " + body.current.weather_descriptions[0] + ". " + "It is currently " + body.current.temperature + " degres out. It is " + body.current.precip + "% chance of rain."
+            callback(undefined, weatherStatus)
         }
     })
 }
