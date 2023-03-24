@@ -8,18 +8,27 @@ console.log(__filename)
 const path = require('path')
 app.use(express.static(path.join(__dirname, '../public')))
 
-// respond with "hello world" when a GET request is made to the homepage
+app.set('view engine', 'hbs')
+
 app.get('/', (req, res) => {
-    res.send('hello world')
+    res.render('index', {
+        title: 'Weather App',
+        name: 'Santiago'
+    })
 })
 
-// app.get('/help', (req, res) => {
-//     res.send('Help')
-// })
+app.get('/about', (req, res) => {
+    res.render('about', {
+        title: 'About Me',
+        name: 'Santiago'
+    })
+})
 
-// app.get('/about', (req, res) => {
-//     res.send('<h1>About</h1>')
-// })
+app.get('/help', (req, res) => {
+    res.render('help', {
+        message: 'This is a example message'
+    })
+})
 
 app.get('/weather', (req, res) => {
     res.send({
